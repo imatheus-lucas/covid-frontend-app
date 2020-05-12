@@ -1,40 +1,31 @@
-import React from "react";
-import { View,Text,StyleSheet,FlatList } from "react-native";
-import Card from '../componente/card'
+import React,{useEffect,useState} from "react";
+import { View, Text, StyleSheet, FlatList } from "react-native";
+import Card from "../componente/card";
 import { Container, CardBody, CardText, Cardfooter } from "./styles";
-
-
-
-const Data = [
-  {
-    id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-  },
-  {
-    id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
-  },
-  {
-    id: "58694a0f-3da1-47a1f-bd96-1455a71e29d72",
-  },
-  {
-    id: "58694a0f-3da1-471f-bds96-1455a71e29d72",
-  },
-  {
-    id: "58694a0f-3da1-471f-bsd96-145571e29d72",
-  },
-];
-
-
+import api from '../../services/api'
 const Situation = () => {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    laod();
+  }, []);
+
+  async function laod() {
+    const response = await api.get("/api/report/v1");
+     
+    setData(response.data.data);
+  }
+
   return (
     <Container>
       <FlatList
-        data={Data}
-        renderItem={({ item }) => (
-            <Card/>
-        )
-        }
-        keyExtractor={item => item.id}
-      />
+        data={Object.values(data)}
+        renderItem={({ item }) => <Card data={item}/>}
+        keyExtractor={(item) => item.uf}
+        showsHorizontalScrollIndicator={false}
+      /> 
+      <View style={{flex:1, marginBottom:100}}>
+      </View>  
     </Container>
   );
 };

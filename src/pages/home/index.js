@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text} from "react-native";
+import api from '../../services/api';
 import {Ionicons, Feather} from '@expo/vector-icons'
+import img from '../assets/imagens/menu.png'
 import {
   Container,
   Header,
@@ -14,11 +16,21 @@ import {
   Situation,
   SituationText,
   Description,
-  DescriptionText
+  DescriptionText,
+  Image
 } from "./styles";
 
 const Home = ({navigation}) => {
-  const [picker, setPicker] = useState();
+  const [data, setData] = useState([])
+  useEffect(() => {
+    laod();
+  }, []);
+  async function laod(){
+    const response = await api.get('/api/report/v1/brazil');
+    console.log(response.data)
+    setData(response.data.data);
+  }
+ 
   return (
     <Container>
       <Grid>
@@ -26,7 +38,9 @@ const Home = ({navigation}) => {
           <HeaderText>COVID-19</HeaderText>
         </Header>
         <Screen>
-          <Box />
+          <Box>
+              <Image source={img} resizeMode='contain'/>
+          </Box>  
           <Situation onPress={() => navigation.navigate('Situation')}>
               <Ionicons name={'md-pin'} size={32} color={'#4262E9'} />
               <SituationText>Situação</SituationText>
@@ -34,21 +48,21 @@ const Home = ({navigation}) => {
           </Situation>  
           <Count>
             <CountBox color="#A694C4">
-              <CountText>114.715</CountText>
+              <CountText>{data.confirmed}</CountText>
               <DescriptionText>
                     Infectados
               </DescriptionText>
              </CountBox>
             <CountBox color="#EA5467" >
-              <CountText>7.921</CountText>
+              <CountText>{data.deaths}</CountText>
               <DescriptionText>
                     Óbitos
               </DescriptionText>
              </CountBox>
             <CountBox color="#FEC961" >
-              <CountText>6,9 </CountText>
+              <CountText>{data.recovered}</CountText>
               <DescriptionText>
-                    Letaldiade
+                    Curados
               </DescriptionText>
            </CountBox>
           </Count>

@@ -14,25 +14,26 @@ import {
   FooterText3
 } from "./styles";
 
-const card = () => {
+const card = ({data}) => {
+  console.log(data)
   return (
     <Container>
       <Body>
-        <BodyText> Acre </BodyText>
+  <BodyText>{data.state} - {data.uf}</BodyText>
       </Body>
       <Divider />
       <Footer>
         <FooterBox>
-          <FooterText cor="#a694c4">817</FooterText>
+  <FooterText cor="#a694c4">{data.cases}</FooterText>
           <FooterText3>Confirmados</FooterText3>
         </FooterBox>
         <FooterBox>
-          <FooterText1 cor="#EA5467">80</FooterText1>
+          <FooterText1 cor="#EA5467">{data.deaths}</FooterText1>
           <FooterText3>Óbitos</FooterText3>
         </FooterBox>
         <FooterBox>
-          <FooterText2  cor="#FEC961">24</FooterText2>
-          <FooterText3>Letalidade</FooterText3>
+          <FooterText2  cor="#FEC961">{data.suspects}</FooterText2>
+          <FooterText3>Suspeitos</FooterText3>
         </FooterBox>
       </Footer>
     </Container>

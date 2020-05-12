@@ -7,11 +7,17 @@ export const Container = styled.View`
   
   
 `;
+export const HeaderText = styled.Text`
+   font-size:20px;
+   font-weight:bold;
+   color:#dddd;
+`;
+
 export const Box = styled.View`
   width:325px;
   margin:0 16px;
   height:200px;
-  justify-content:center;
   border-radius:10px;
   elevation:2px;
+  padding:15px;
 `;

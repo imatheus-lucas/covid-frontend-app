@@ -1,8 +1,8 @@
 import styled from "styled-components/native";
 
-export const Container = styled.View`
+export const Container = styled.SafeAreaView`
   flex: 1;
-  background: #fff;
+  background-color: #fff;
 `;
 
 export const Grid = styled.View`
@@ -31,7 +31,17 @@ export const Box = styled.View`
   box-shadow: 2px 2px 2px #ddd;
   background-color: #fff;
   margin-bottom: 30px;
+  justify-content:center;
+  align-items:center;
+
 `;
+export const Image = styled.Image`
+  width:150px;
+  height:150px;
+  
+  
+`;
+
 
 export const Situation = styled.TouchableOpacity`
   width: 300px;

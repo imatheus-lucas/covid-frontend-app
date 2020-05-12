@@ -3,18 +3,18 @@ import { View } from "react-native";
 
 import Home from "../pages/home";
 import Situation from "../pages/Situation";
-import Chart from '../pages//charts'
+import Mundial from '../pages/mundial'
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-import { Feather, MaterialCommunityIcons, AntDesign } from "@expo/vector-icons";
+import { FontAwesome5, MaterialCommunityIcons, AntDesign } from "@expo/vector-icons";
 
 const Tab = createBottomTabNavigator();
 
 const Routes = () => {
   const icons = {
-    Charts: {
-      lib: Feather,
-      name: "pie-chart",
+    Mundial: {
+      lib: FontAwesome5,
+      name: "globe-americas",
     },
     Home: {
       lib: AntDesign,
@@ -44,19 +44,24 @@ const Routes = () => {
       })}
       tabBarOptions={{
         style: {
+          position: 'absolute',
           backgroundColor: "#fff",
-          borderTopColor: "rgba(255,255,255,0.6)",
           borderTopColor: "#fff",
           borderTopLeftRadius: 25,
           borderTopRightRadius: 25,
+          borderBottomLeftRadius:25,
+          borderBottomRightRadius:25,
           height: 60,
+          bottom:10,
+        
         },
         activeTintColor: "#182B78",
         inactiveTintColor: "#4262E9",
       }}
     >
+     
+      <Tab.Screen name="Mundial" options={{ title: "" }} component={Mundial} />
       <Tab.Screen name="Home" options={{ title: "" }} component={Home} />
-      <Tab.Screen name="Charts" options={{ title: "" }} component={Chart} />
       <Tab.Screen
         name="Situation"
         options={{ title: "" }}
